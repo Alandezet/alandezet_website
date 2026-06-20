@@ -21,7 +21,7 @@ body {
     position: relative;
 }
 
-/* --- THE MOVING TICKER (SPEED INCREASED TO 6s) --- */
+/* --- THE BULLETPROOF INLINE-BLOCK TICKER --- */
 .ticker-wrap {
     background: var(--volt-yellow);
     color: var(--bg-color);
@@ -37,19 +37,22 @@ body {
 }
 
 .ticker {
-    display: flex;
+    display: inline-block;
     white-space: nowrap;
-    animation: ticker 3s linear infinite;
-    flex-shrink: 0; /* Accelerated from 15s to 6s */
+    padding-left: 100%; /* Starts text right at the edge of the viewport */
+    animation: ticker 20s linear infinite; /* Adjust 20s up to slow down, down to speed up */
 }
 
 .ticker-item {
-    padding: 0 2rem;
+    display: inline-block;
+    padding-right: 2rem;
+    color: var(--bg-color);
+    background: transparent;
 }
 
 @keyframes ticker {
     0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); } /* Pulls the entire actual text string through */
 }
 
 /* --- CRT SCANLINE EFFECT --- */
@@ -248,7 +251,7 @@ body {
     width: 16px;
     height: 16px;
     margin-right: 8px;
-    fill: currentColor; /* Matches text color dynamically */
+    fill: currentColor;
 }
 
 /* --- IMAGE OVERLAY (MODAL) --- */
@@ -277,27 +280,3 @@ body {
     font-size: 2rem;
     cursor: pointer;
 }
-/* --- DYNAMIC TICKER STYLING MODS --- */
-.priority-alert {
-    background: #000000;
-    color: var(--volt-yellow);
-    font-weight: 900;
-    border-left: 2px solid var(--volt-yellow);
-    border-right: 2px solid var(--volt-yellow);
-    padding: 0 15px !important;
-}
-
-.name-drop {
-    background: #ff0055;
-    color: #ffffff;
-    font-weight: 900;
-    padding: 0 20px !important;
-    text-transform: uppercase;
-    animation: pulse-glow 1s infinite alternate;
-}
-
-@keyframes pulse-glow {
-    0% { box-shadow: inset 0 0 5px rgba(255,255,255,0.6); }
-    100% { box-shadow: inset 0 0 15px rgba(255,255,255,1); }
-}
-
