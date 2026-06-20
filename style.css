@@ -276,3 +276,27 @@ body {
     font-size: 2rem;
     cursor: pointer;
 }
+/* --- DYNAMIC TICKER STYLING MODS --- */
+.priority-alert {
+    background: #000000;
+    color: var(--volt-yellow);
+    font-weight: 900;
+    border-left: 2px solid var(--volt-yellow);
+    border-right: 2px solid var(--volt-yellow);
+    padding: 0 15px !important;
+}
+
+.name-drop {
+    background: #ff0055;
+    color: #ffffff;
+    font-weight: 900;
+    padding: 0 20px !important;
+    text-transform: uppercase;
+    animation: pulse-glow 1s infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: inset 0 0 5px rgba(255,255,255,0.6); }
+    100% { box-shadow: inset 0 0 15px rgba(255,255,255,1); }
+}
+
