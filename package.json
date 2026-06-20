@@ -1,0 +1,15 @@
+{
+  "name": "alandezet-website",
+  "version": "1.0.0",
+  "description": "Aland Ezet's portfolio website",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["portfolio", "website"],
+  "author": "Aland Ezet",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
