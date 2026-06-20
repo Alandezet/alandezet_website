@@ -14,26 +14,27 @@ window.onclick = function(event) {
     }
 }
 
-// --- NEW SYSTEM: DYNAMIC TICKER ENGINE ---
+// --- UPGRADED TICKER ENGINE ---
 async function loadTickerData() {
     const tickerContainer = document.getElementById("dynamic-ticker");
     
     try {
-        // Fetch ticker.txt relative to your root path
-        const response = await fetch('ticker.txt');
+        // Added standard cache buster timestamp (?t=...) so changes drop instantly 
+        const response = await fetch(`ticker.txt?t=${new Date().getTime()}`);
         if (!response.ok) throw new Error('Could not load ticker file.');
         
         const data = await response.text();
-        const lines = data.split('\n');
+        
+        // Split by both standard Unix (\n) and Windows (\r\n) line breaks cleanly
+        const lines = data.split(/\r?\n/);
         
         let priorityItems = [];
         let nameItems = [];
         let standardItems = [];
         
-        // Parse each row and check for priority status
         lines.forEach(line => {
             let cleanLine = line.trim();
-            if (!cleanLine) return;
+            if (!cleanLine) return; // Skip completely blank lines
             
             if (cleanLine.startsWith('[PRIORITY]')) {
                 let content = cleanLine.replace('[PRIORITY]', '').trim();
@@ -49,18 +50,21 @@ async function loadTickerData() {
             }
         });
         
-        // Combine them: Names and Priority statements go straight to the front of the line
+        // Assemble the list 
         const completeManifest = [...nameItems, ...priorityItems, ...standardItems];
         
-        // Duplicate the list inside the ticker to ensure infinite smooth scrolling loop
-        const continuousStream = [...completeManifest, ...completeManifest, ...completeManifest];
+        // If the list is too short, multiply it so the screen stays completely full
+        let continuousStream = [];
+        const repeatCount = completeManifest.length < 4 ? 6 : 3;
+        for (let i = 0; i < repeatCount; i++) {
+            continuousStream = continuousStream.concat(completeManifest);
+        }
         
         tickerContainer.innerHTML = continuousStream.join('');
         
     } catch (error) {
         console.error(error);
-        // Fallback banner just in case the text file fails to read
-        tickerContainer.innerHTML = '<span class="ticker-item">SYSTEM ACTIVE // ERROR PARSING MANIFEST // PLEASE HIRE ME 😭😭</span>';
+        tickerContainer.innerHTML = '<span class="ticker-item">SYSTEM ACTIVE // REBOOT REQUIRED // HIRE ME PLEASE 😭😭</span>';
     }
 }
 
