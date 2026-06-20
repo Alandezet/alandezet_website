@@ -3,12 +3,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace; /* Monospace for that hacker edge */
+    font-family: 'Courier New', Courier, monospace;
 }
 
 :root {
     --bg-color: #050505;
-    --volt-yellow: #ccff00; /* Blinding contrast color */
+    --volt-yellow: #ccff00;
     --text-white: #ffffff;
     --card-bg: #111111;
     --border-color: #222222;
@@ -21,7 +21,7 @@ body {
     position: relative;
 }
 
-/* --- THE MOVING TICKER (KINETIC ENERGY) --- */
+/* --- THE MOVING TICKER (SPEED INCREASED TO 6s) --- */
 .ticker-wrap {
     background: var(--volt-yellow);
     color: var(--bg-color);
@@ -39,7 +39,7 @@ body {
 .ticker {
     display: flex;
     white-space: nowrap;
-    animation: ticker 15s linear infinite;
+    animation: ticker 6s linear infinite; /* Accelerated from 15s to 6s */
 }
 
 .ticker-item {
@@ -188,7 +188,6 @@ body {
     background: #222;
     height: 6px;
     margin-top: 5px;
-    border-radius: 0;
 }
 
 .bar-fill {
@@ -207,28 +206,48 @@ body {
     color: #e0e0e0;
 }
 
-/* --- BUTTONS & CV ACTION --- */
+/* --- BUTTONS & ACTIONS --- */
 .cyber-btn {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
     color: var(--volt-yellow);
     border: 1px solid var(--volt-yellow);
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 0.85rem;
     font-weight: bold;
     text-decoration: none;
     letter-spacing: 1px;
-    margin-top: 15px;
+    margin-top: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
     width: 100%;
-    text-align: center;
 }
 
 .cyber-btn:hover {
     background: var(--volt-yellow);
     color: var(--bg-color);
-    box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+    box-shadow: 0 0 12px rgba(204, 255, 0, 0.6);
+}
+
+/* --- WHATSAPP SVG BUTTON SPECIAL STYLE --- */
+.whatsapp-btn {
+    border-color: #00ff66;
+    color: #00ff66;
+}
+
+.whatsapp-btn:hover {
+    background: #00ff66;
+    color: var(--bg-color);
+    box-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+}
+
+.whatsapp-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    fill: currentColor; /* Matches text color dynamically */
 }
 
 /* --- IMAGE OVERLAY (MODAL) --- */
