@@ -39,7 +39,7 @@ body {
 .ticker {
     display: flex;
     white-space: nowrap;
-    animation: ticker 6s linear infinite; /* Accelerated from 15s to 6s */
+    animation: ticker 3s linear 120s; /* Accelerated from 15s to 6s */
 }
 
 .ticker-item {
