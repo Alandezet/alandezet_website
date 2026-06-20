@@ -1,0 +1,259 @@
+/* --- RESET & SYSTEM FONTS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace; /* Monospace for that hacker edge */
+}
+
+:root {
+    --bg-color: #050505;
+    --volt-yellow: #ccff00; /* Blinding contrast color */
+    --text-white: #ffffff;
+    --card-bg: #111111;
+    --border-color: #222222;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-white);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- THE MOVING TICKER (KINETIC ENERGY) --- */
+.ticker-wrap {
+    background: var(--volt-yellow);
+    color: var(--bg-color);
+    padding: 8px 0;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.ticker {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 15s linear infinite;
+}
+
+.ticker-item {
+    padding: 0 2rem;
+}
+
+@keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* --- CRT SCANLINE EFFECT --- */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    z-index: 99;
+    pointer-events: none;
+}
+
+/* --- CONTAINER & HERO --- */
+.container {
+    max-width: 800px;
+    margin: 80px auto 40px auto;
+    padding: 0 20px;
+}
+
+.hero {
+    padding: 40px 0;
+    text-align: left;
+}
+
+/* --- GLITCH ANIMATION --- */
+.glitch {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--text-white);
+    position: relative;
+    letter-spacing: -1px;
+}
+
+.glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--volt-yellow);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #ff0055;
+    clip: rect(85px, 450px, 140px, 0);
+    animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% { clip: rect(15px, 9999px, 66px, 0); }
+    100% { clip: rect(34px, 9999px, 55px, 0); }
+}
+
+@keyframes glitch-anim2 {
+    0% { clip: rect(70px, 9999px, 105px, 0); }
+    100% { clip: rect(12px, 9999px, 85px, 0); }
+}
+
+.subtitle {
+    color: var(--volt-yellow);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.cyber-line {
+    border: 0;
+    height: 2px;
+    background: var(--volt-yellow);
+    margin-bottom: 30px;
+}
+
+/* --- GRID LAYOUT --- */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media(min-width: 600px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- CARDS --- */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    border-color: var(--volt-yellow);
+    transform: translateY(-2px);
+}
+
+.card h3 {
+    color: var(--volt-yellow);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #b0b0b0;
+}
+
+/* --- STATS / PROGRESS BARS --- */
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.stat-val {
+    color: var(--volt-yellow);
+}
+
+.stat-bar {
+    background: #222;
+    height: 6px;
+    margin-top: 5px;
+    border-radius: 0;
+}
+
+.bar-fill {
+    background: var(--volt-yellow);
+    height: 100%;
+}
+
+/* --- LISTS --- */
+.skills-list {
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+.skills-list li {
+    margin-bottom: 8px;
+    color: #e0e0e0;
+}
+
+/* --- BUTTONS & CV ACTION --- */
+.cyber-btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--volt-yellow);
+    border: 1px solid var(--volt-yellow);
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.cyber-btn:hover {
+    background: var(--volt-yellow);
+    color: var(--bg-color);
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+}
+
+/* --- IMAGE OVERLAY (MODAL) --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    max-width: 100%;
+    max-height: 85vh;
+    border: 2px solid var(--volt-yellow);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px; right: 20px;
+    color: var(--volt-yellow);
+    font-size: 2rem;
+    cursor: pointer;
+}
