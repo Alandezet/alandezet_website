@@ -14,56 +14,32 @@ window.onclick = function(event) {
     }
 }
 
-// --- BULLETPROOF ENGINE: ARRAYS DIRECTLY IN CODE ---
-function loadTickerData() {
+// --- SIMPLIFIED BULLETPROOF TICKER ENGINE ---
+function initTicker() {
     const tickerContainer = document.getElementById("dynamic-ticker");
-    
-    // EDIT THESE LINES DIRECTLY ON GITHUB FROM YOUR PHONE!
-    // Just change "Boss" to the manager's name before you walk in.
-    const rawLines = [
-        "[NAME] Welcome to the matrix, Boss. Let's make a deal. //",
-        "[PRIORITY] PLEASE HIRE ME 😭😭 //",
-        "[PRIORITY] EMPLOYEE OF THE CENTURY INBOUND //",
-        "[STANDARD] TRILINGUAL OPERATOR //",
-        "[STANDARD] BACKEND PYTHON ENGINE //",
-        "[STANDARD] 100% EXAM PASSED ONLY 0% SLEEP //",
-        "[STANDARD] MY PC UPGRADES ARE DEPENDING ON YOU //"
+    if (!tickerContainer) return;
+
+    // EDIT THIS NAME DIRECTLY ON GITHUB FROM YOUR PHONE!
+    // Just swap out "Boss" for the manager's actual name.
+    const managerName = "Boss"; 
+
+    // All your text items are stored right here safely
+    const items = [
+        `<span class="ticker-item name-drop">🔥 Welcome to the matrix, ${managerName}. Let's make a deal. //</span>`,
+        `<span class="ticker-item priority-alert">⚠️ PLEASE HIRE ME 😭😭 //</span>`,
+        `<span class="ticker-item priority-alert">⚠️ EMPLOYEE OF THE CENTURY INBOUND //</span>`,
+        `<span class="ticker-item">TRILINGUAL OPERATOR //</span>`,
+        `<span class="ticker-item">BACKEND PYTHON ENGINE //</span>`,
+        `<span class="ticker-item">100% EXAM PASSED ONLY 0% SLEEP //</span>`,
+        `<span class="ticker-item">MY PC UPGRADES ARE DEPENDING ON YOU //</span>`
     ];
+
+    // Combine them and repeat them 4 times to fill the screen for a smooth scrolling effect
+    const fullStream = [...items, ...items, ...items, ...items];
     
-    let priorityItems = [];
-    let nameItems = [];
-    let standardItems = [];
-    
-    rawLines.forEach(line => {
-        let cleanLine = line.trim();
-        if (!cleanLine) return;
-        
-        if (cleanLine.startsWith('[PRIORITY]')) {
-            let content = cleanLine.replace('[PRIORITY]', '').trim();
-            priorityItems.push(`<span class="ticker-item priority-alert">⚠️ ${content}</span>`);
-        } else if (cleanLine.startsWith('[NAME]')) {
-            let content = cleanLine.replace('[NAME]', '').trim();
-            nameItems.push(`<span class="ticker-item name-drop">🔥 ${content}</span>`);
-        } else if (cleanLine.startsWith('[STANDARD]')) {
-            let content = cleanLine.replace('[STANDARD]', '').trim();
-            standardItems.push(`<span class="ticker-item">${content}</span>`);
-        } else {
-            standardItems.push(`<span class="ticker-item">${cleanLine}</span>`);
-        }
-    });
-    
-    // Assemble the list 
-    const completeManifest = [...nameItems, ...priorityItems, ...standardItems];
-    
-    // Multiply the list so it continuously fills the screen width for the loop animation
-    let continuousStream = [];
-    const repeatCount = 4; 
-    for (let i = 0; i < repeatCount; i++) {
-        continuousStream = continuousStream.concat(completeManifest);
-    }
-    
-    tickerContainer.innerHTML = continuousStream.join('');
+    // Inject it directly into the HTML page
+    tickerContainer.innerHTML = fullStream.join('');
 }
 
-// Boot up the engine when the page loads
-document.addEventListener("DOMContentLoaded", loadTickerData);
+// Run the script instantly as soon as the page loads
+window.onload = initTicker;
